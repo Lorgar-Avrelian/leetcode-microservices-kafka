@@ -1,26 +1,19 @@
-package lorgar.avrelian.base.model;
+package lorgar.avrelian.core.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lorgar.avrelian.base.model.RunResult;
 
 import java.util.List;
 import java.util.Objects;
 
 @Schema(title = "Task report", description = "Task solving report")
-public class TaskReport<M, T> {
+public class Report<M, T> {
     @Schema(title = "Task ID", description = "ID of the LeetCode task", defaultValue = "0")
     private int id;
     @Schema(title = "Task results", description = "Results of task solving tests")
     private List<RunResult<M, T>> results;
-    @Schema(title = "Updated flag", description = "Task report updated flag")
-    private boolean updated;
 
-    public TaskReport() {
-    }
-
-    public TaskReport(int id, List<RunResult<M, T>> results, boolean updated) {
-        this.id = id;
-        this.results = results;
-        this.updated = updated;
+    public Report() {
     }
 
     public int getId() {
@@ -39,32 +32,23 @@ public class TaskReport<M, T> {
         this.results = results;
     }
 
-    public boolean isUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(boolean updated) {
-        this.updated = updated;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        TaskReport<?, ?> report = (TaskReport<?, ?>) o;
-        return id == report.id && updated == report.updated && Objects.equals(results, report.results);
+        Report<?, ?> report = (Report<?, ?>) o;
+        return id == report.id && Objects.equals(results, report.results);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, results, updated);
+        return Objects.hash(id, results);
     }
 
     @Override
     public String toString() {
-        return "TaskReport{" +
+        return "Report{" +
                 "id=" + id +
                 ", results=" + results +
-                ", updated=" + updated +
                 '}';
     }
 }

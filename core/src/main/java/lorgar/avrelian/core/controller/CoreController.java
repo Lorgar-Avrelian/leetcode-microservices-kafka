@@ -5,13 +5,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lorgar.avrelian.base.model.RunResult;
+import lorgar.avrelian.core.dto.Report;
 import lorgar.avrelian.core.dto.TaskCount;
 import lorgar.avrelian.core.service.CoreService;
-import lorgar.avrelian.base.model.TaskReport;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Tag(name = "Core", description = "Core controller")
@@ -54,7 +61,7 @@ public class CoreController {
                             description = "OK",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = TaskReport.class)
+                                    schema = @Schema(implementation = Report.class)
                             )
                     ),
                     @ApiResponse(
@@ -62,13 +69,21 @@ public class CoreController {
                             description = "Bad request",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = TaskReport.class)
+                                    schema = @Schema(implementation = Report.class)
                             )
                     )
             }
     )
-    public ResponseEntity<TaskReport> getTask(@RequestParam(name = "id", defaultValue = "1") int id) {
-        TaskReport taskReport = coreService.getTaskReport(id);
-        return ResponseEntity.ok(taskReport);
+    public ResponseEntity<Report> getTask(@RequestParam(name = "id", defaultValue = "1") int id) {
+        Report taskReport = coreService.getTaskReport(id);
+        if (taskReport != null) {
+            return ResponseEntity.ok(taskReport);
+        } else {
+            Report emptyReport = new Report();
+            emptyReport.setId(id);
+            RunResult<String, String> emptyResult = new RunResult<>();
+            emptyReport.setResults(new ArrayList<>(List.of(emptyResult)));
+            return ResponseEntity.badRequest().body(emptyReport);
+        }
     }
 }
