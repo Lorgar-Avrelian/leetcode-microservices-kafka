@@ -13,6 +13,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>leetcode</name>
 	<description>leetcode</description>
+	<modules>
+		<module>core</module>
+		<module>base</module>
+		<module>task0002</module>
+	</modules>
 	<url/>
 	<licenses>
 		<license/>
