@@ -40,6 +40,7 @@ public class CoreServiceKafka implements CoreService {
                 .subscribe(
                         record -> {
                             TaskReport report = json.fromJson(record.value().toString(), TaskReport.class);
+                            System.out.println("Received: " + report);
                             reports.put(report.getId(), report);
                             record.receiverOffset().acknowledge();
                         }
@@ -60,6 +61,32 @@ public class CoreServiceKafka implements CoreService {
                                     SenderRecord.create(
                                             coreTopic,
                                             0,
+                                            System.currentTimeMillis(),
+                                            String.valueOf(message.hashCode()),
+                                            message,
+                                            null
+                                    )
+                            )
+                    )
+                    .subscribe();
+            kafkaSender.send(
+                            Mono.just(
+                                    SenderRecord.create(
+                                            coreTopic,
+                                            1,
+                                            System.currentTimeMillis(),
+                                            String.valueOf(message.hashCode()),
+                                            message,
+                                            null
+                                    )
+                            )
+                    )
+                    .subscribe();
+            kafkaSender.send(
+                            Mono.just(
+                                    SenderRecord.create(
+                                            coreTopic,
+                                            2,
                                             System.currentTimeMillis(),
                                             String.valueOf(message.hashCode()),
                                             message,
