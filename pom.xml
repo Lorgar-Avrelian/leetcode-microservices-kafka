@@ -16,6 +16,7 @@
 	<modules>
 		<module>core</module>
 		<module>base</module>
+		<module>task0001</module>
 		<module>task0002</module>
 		<module>task0003</module>
 	</modules>
