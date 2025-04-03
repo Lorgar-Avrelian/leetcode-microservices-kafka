@@ -38,7 +38,7 @@ public class KafkaConfig {
                 .partitions(3)
                 .replicas(3)
                 .config(
-                        TopicConfig.RETENTION_MS_CONFIG, String.valueOf(Duration.ofDays(7).toMillis())
+                        TopicConfig.RETENTION_MS_CONFIG, String.valueOf(Duration.ofDays(1).toMillis())
                 )
                 .build();
     }

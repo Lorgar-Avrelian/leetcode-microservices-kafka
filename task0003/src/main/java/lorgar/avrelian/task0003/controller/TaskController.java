@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0002.controller;
+package lorgar.avrelian.task0003.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "Task № 2", description = "Task № 2 controller")
+@Tag(name = "Task № 3", description = "Task № 3 controller")
 public class TaskController {
-    private final TaskRunService<int[][], int[]> taskRunService;
+    private final TaskRunService<String, Integer> taskRunService;
 
-    public TaskController(TaskRunService<int[][], int[]> taskRunService) {
+    public TaskController(TaskRunService<String, Integer> taskRunService) {
         this.taskRunService = taskRunService;
     }
 
@@ -45,8 +45,8 @@ public class TaskController {
                     )
             }
     )
-    public ResponseEntity<TaskReport<int[][], int[]>> getResult() {
-        TaskReport<int[][], int[]> report = taskRunService.runTask();
+    public ResponseEntity<TaskReport<String, Integer>> getResult() {
+        TaskReport<String, Integer> report = taskRunService.runTask();
         return ResponseEntity.ok(report);
     }
 }

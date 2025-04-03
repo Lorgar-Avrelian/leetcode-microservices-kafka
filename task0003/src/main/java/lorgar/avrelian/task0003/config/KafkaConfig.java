@@ -1,6 +1,5 @@
-package lorgar.avrelian.core.config;
+package lorgar.avrelian.task0003.config;
 
-import jakarta.annotation.PostConstruct;
 import lorgar.avrelian.base.util.TopicNameUtil;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -19,7 +18,6 @@ import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,30 +26,15 @@ import java.util.Map;
 public class KafkaConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String servers;
-    @Value("${spring.kafka.core-topic.name}")
-    private String coreTopic;
-    @Value("${tasks}")
-    private String tasks;
-    public static List<String> topics;
-    public static List<Integer> doneTasks;
-
-    @PostConstruct
-    public void init() {
-        topics = new ArrayList<>();
-        doneTasks = new ArrayList<>();
-        String s = tasks.trim().replace(" ", "");
-        String[] split = s.split(",");
-        for (String topic : split) {
-            int i = Integer.parseInt(topic);
-            doneTasks.add(i);
-            topics.add(TopicNameUtil.formatName(i));
-        }
-    }
+    @Value("${task.number}")
+    private int taskNumber;
+    @Value("${topics}")
+    private List<String> topics;
 
     @Bean
     public NewTopic coreTopic() {
         return TopicBuilder
-                .name(coreTopic)
+                .name(TopicNameUtil.formatName(taskNumber))
                 .partitions(3)
                 .replicas(3)
                 .config(
@@ -78,7 +61,7 @@ public class KafkaConfig {
     public Map<String, Object> consumerProperties() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "core");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "task");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put("spring.json.trusted.packages", "*");
