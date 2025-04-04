@@ -61,7 +61,7 @@ public class KafkaConfig {
     public Map<String, Object> consumerProperties() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, servers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "task");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, TopicNameUtil.formatName(taskNumber));
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put("spring.json.trusted.packages", "*");
