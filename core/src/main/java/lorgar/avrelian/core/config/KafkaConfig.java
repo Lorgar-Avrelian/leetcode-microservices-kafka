@@ -53,7 +53,7 @@ public class KafkaConfig {
         return TopicBuilder
                 .name(coreTopic)
                 .partitions(3)
-                .replicas(3)
+                .replicas(1)
                 .config(
                         TopicConfig.RETENTION_MS_CONFIG, String.valueOf(Duration.ofDays(1).toMillis())
                 )

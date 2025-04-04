@@ -76,6 +76,32 @@ public class Task0002RunService implements TaskRunService<int[][], int[]> {
                         )
                 )
                 .subscribe();
+        kafkaSender.send(
+                        Mono.just(
+                                SenderRecord.create(
+                                        TopicNameUtil.formatName(taskNumber),
+                                        1,
+                                        System.currentTimeMillis(),
+                                        String.valueOf(report.hashCode()),
+                                        report,
+                                        null
+                                )
+                        )
+                )
+                .subscribe();
+        kafkaSender.send(
+                        Mono.just(
+                                SenderRecord.create(
+                                        TopicNameUtil.formatName(taskNumber),
+                                        2,
+                                        System.currentTimeMillis(),
+                                        String.valueOf(report.hashCode()),
+                                        report,
+                                        null
+                                )
+                        )
+                )
+                .subscribe();
         return report;
     }
 }
