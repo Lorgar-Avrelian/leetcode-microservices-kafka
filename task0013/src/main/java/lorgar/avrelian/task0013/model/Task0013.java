@@ -9,6 +9,15 @@ import java.util.Map;
 public class Task0013 extends Task<String, Integer> {
     private static final char[] chars = new char[]{'I', 'V', 'X', 'L', 'C', 'D', 'M'};
     private static final char[] threeTimesChars = new char[]{'I', 'X', 'C', 'M'};
+    private static final Map<Character, Integer> charValue = new HashMap<>(Map.of(
+            'I', 1,
+            'V', 5,
+            'X', 10,
+            'L', 50,
+            'C', 100,
+            'D', 500,
+            'M', 1000
+    ));
 
     public Task0013(TestValues<String, Integer> testValues) {
         super(testValues);
@@ -22,22 +31,22 @@ public class Task0013 extends Task<String, Integer> {
     private int romanToInt(String s) {
         if (s == null) return -1;
         if (s.isBlank()) return 0;
-        String upperS = s.toUpperCase();
+        String romanNumber = s.toUpperCase();
         Map<Character, Integer> charCount = new HashMap<>();
         for (char c : chars) {
             charCount.put(c, 0);
         }
-        for (int i = 0; i < upperS.length(); i++) {
-            switch (upperS.charAt(i)) {
+        for (int i = 0; i < romanNumber.length(); i++) {
+            switch (romanNumber.charAt(i)) {
                 case 'I':
                 case 'X':
                 case 'C':
                 case 'M':
-                    if (charCount.get(upperS.charAt(i)) == 3) return -1;
-                    charCount.put(upperS.charAt(i), charCount.get(upperS.charAt(i)) + 1);
-                    if (i > 0 && upperS.charAt(i) != upperS.charAt(i - 1)) {
+                    if (charCount.get(romanNumber.charAt(i)) == 3) return -1;
+                    charCount.put(romanNumber.charAt(i), charCount.get(romanNumber.charAt(i)) + 1);
+                    if (i > 0 && romanNumber.charAt(i) != romanNumber.charAt(i - 1)) {
                         for (char threeTimesChar : threeTimesChars) {
-                            if (threeTimesChar != upperS.charAt(i)) {
+                            if (threeTimesChar != romanNumber.charAt(i)) {
                                 charCount.put(threeTimesChar, 0);
                             }
                         }
@@ -46,8 +55,8 @@ public class Task0013 extends Task<String, Integer> {
                 case 'V':
                 case 'L':
                 case 'D':
-                    if (charCount.get(upperS.charAt(i)) == 1) return -1;
-                    charCount.put(upperS.charAt(i), charCount.get(upperS.charAt(i)) + 1);
+                    if (charCount.get(romanNumber.charAt(i)) == 1) return -1;
+                    charCount.put(romanNumber.charAt(i), charCount.get(romanNumber.charAt(i)) + 1);
                     for (char threeTimesChar : threeTimesChars) {
                         charCount.put(threeTimesChar, 0);
                     }
@@ -56,39 +65,13 @@ public class Task0013 extends Task<String, Integer> {
                     return -1;
             }
         }
-        int n = upperS.length();
-        int i = 0;
         int result = 0;
+        int i = 0;
         int previous = Integer.MAX_VALUE;
-        while (i < n) {
-            int current;
-            switch (upperS.charAt(i)) {
-                case 'I':
-                    current = 1;
-                    break;
-                case 'V':
-                    current = 5;
-                    break;
-                case 'X':
-                    current = 10;
-                    break;
-                case 'L':
-                    current = 50;
-                    break;
-                case 'C':
-                    current = 100;
-                    break;
-                case 'D':
-                    current = 500;
-                    break;
-                case 'M':
-                    current = 1000;
-                    break;
-                default:
-                    return -1;
-            }
+        while (i < romanNumber.length()) {
+            int current = charValue.get(romanNumber.charAt(i));
             if (previous < current) {
-                result += current - 2 * previous;
+                result += current - previous * 2;
             } else {
                 result += current;
             }
