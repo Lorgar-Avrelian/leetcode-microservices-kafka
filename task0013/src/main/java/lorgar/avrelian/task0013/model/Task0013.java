@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Task0013 extends Task<String, Integer> {
-    private static final char[] chars = new char[]{'I', 'V', 'X', 'L', 'C', 'D', 'M'};
-    private static final char[] threeTimesChars = new char[]{'I', 'X', 'C', 'M'};
     private static final Map<Character, Integer> charValue = new HashMap<>(Map.of(
             'I', 1,
             'V', 5,
