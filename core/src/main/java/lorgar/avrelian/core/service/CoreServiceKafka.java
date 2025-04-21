@@ -3,6 +3,7 @@ package lorgar.avrelian.core.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.annotation.PostConstruct;
+import lorgar.avrelian.base.model.RunResult;
 import lorgar.avrelian.core.config.KafkaConfig;
 import lorgar.avrelian.core.dto.Report;
 import lorgar.avrelian.core.dto.TaskCount;
@@ -16,6 +17,7 @@ import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,6 +25,8 @@ public class CoreServiceKafka implements CoreService {
     private static final Map<Integer, TaskReport> reports = new HashMap<>();
     @Value("${spring.kafka.core-topic.name}")
     private String coreTopic;
+    @Value("${tasks}")
+    private String tasks;
     private final KafkaSender<String, Object> kafkaSender;
     private final KafkaReceiver<String, Object> kafkaReceiver;
     private final ReportMapper reportMapper;
@@ -48,8 +52,37 @@ public class CoreServiceKafka implements CoreService {
     }
 
     @Override
+    public String[] getTasksNumbers() {
+        String s = tasks.trim().replace(" ", "");
+        return s.split(",");
+    }
+
+    @Override
     public TaskCount getTaskCount() {
-        return new TaskCount();
+        String s = tasks.trim().replace(" ", "");
+        String[] split = s.split(",");
+        int count = split.length;
+        int[] tasks = new int[count];
+        int success = 0;
+        int fail = 0;
+        for (int i = 0; i < count; i++) {
+            tasks[i] = Integer.parseInt(split[i]);
+            if (reports.containsKey(tasks[i])) {
+                TaskReport report = reports.get(tasks[i]);
+                List<RunResult> results = report.getResults();
+                for (int j = 0; j < results.size(); j++) {
+                    if (!results.get(j).getActual().equals(results.get(j).getExpected())) {
+                        fail++;
+                        break;
+                    }
+                }
+            } else {
+                getTaskReport(tasks[i]);
+                i--;
+            }
+        }
+        success = count - fail;
+        return new TaskCount(count, success, fail);
     }
 
     @Override

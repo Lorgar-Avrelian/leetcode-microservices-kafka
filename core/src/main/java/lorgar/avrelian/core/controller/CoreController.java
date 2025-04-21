@@ -1,6 +1,7 @@
 package lorgar.avrelian.core.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class CoreController {
         this.coreService = coreService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/stat")
     @Operation(
             summary = "Statistic",
             description = "Total statistics of solved tasks",
@@ -48,6 +50,27 @@ public class CoreController {
     public ResponseEntity<TaskCount> getTotal() {
         TaskCount taskCount = coreService.getTaskCount();
         return ResponseEntity.ok(taskCount);
+    }
+
+    @GetMapping
+    @Operation(
+            summary = "Solved tasks",
+            description = "Numbers of solved tasks",
+            tags = "Tasks",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "OK",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    array = @ArraySchema(schema = @Schema(implementation = String.class))
+                            )
+                    )
+            }
+    )
+    public ResponseEntity<String[]> getNumbers() {
+        String[] taskNumbers = coreService.getTasksNumbers();
+        return ResponseEntity.ok(taskNumbers);
     }
 
     @PostMapping
