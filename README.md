@@ -89,6 +89,16 @@ cd .\kafka\
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic core-topic --from-beginning
 ```
 
-```shell
-.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic task-0001 --from-beginning
-```
+#### 11. **For all tasks topics**:
+
+- **Open new tab** at the Windows Terminal;
+- **In this new tab** insert:
+
+    * move to `kafka` directory:
+  ```shell
+  cd .\kafka\
+  ```
+    * run console consumer for this task (task № 0001 in example):
+  ```shell
+  .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic task-0001 --from-beginning
+  ```
