@@ -88,3 +88,7 @@ cd .\kafka\
 ```shell
 .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic core-topic --from-beginning
 ```
+
+```shell
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic task-0001 --from-beginning
+```
