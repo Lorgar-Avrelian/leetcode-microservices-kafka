@@ -48,21 +48,26 @@ to
 log.dirs=leetcode/kafka-logs
 ```
 
-#### 4. **Open new tab** of the Windows Terminal and insert:
+#### 4. **Delete (if exists)** directories in `kafka` directory:
+
+- `kafka/leetcode`;
+- `kafka/logs`.
+
+#### 5. **Open new tab** of the Windows Terminal and insert:
 
 ```shell
 cd .\kafka\
 ```
 
-#### 5. **In this tab** insert:
+#### 6. **In this tab** insert:
 
 ```shell
 .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 ```
 
-#### 6. **Open new tab** at the Windows Terminal
+#### 7. **Open new tab** at the Windows Terminal
 
-#### 7. **In this new tab** insert:
+#### 8. **In this new tab** insert:
 
 ```shell
 cd .\kafka\
@@ -72,9 +77,9 @@ cd .\kafka\
 .\bin\windows\kafka-server-start.bat .\config\server.properties
 ```
 
-#### 8. **Open new tab** at the Windows Terminal
+#### 9. **Open new tab** at the Windows Terminal
 
-#### 9. **In this new tab** insert:
+#### 10. **In this new tab** insert:
 
 ```shell
 cd .\kafka\
