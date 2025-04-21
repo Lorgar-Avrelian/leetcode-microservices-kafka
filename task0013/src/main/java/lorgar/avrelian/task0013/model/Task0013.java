@@ -32,39 +32,7 @@ public class Task0013 extends Task<String, Integer> {
         if (s == null) return -1;
         if (s.isBlank()) return 0;
         String romanNumber = s.toUpperCase();
-        Map<Character, Integer> charCount = new HashMap<>();
-        for (char c : chars) {
-            charCount.put(c, 0);
-        }
-        for (int i = 0; i < romanNumber.length(); i++) {
-            switch (romanNumber.charAt(i)) {
-                case 'I':
-                case 'X':
-                case 'C':
-                case 'M':
-                    if (charCount.get(romanNumber.charAt(i)) == 3) return -1;
-                    charCount.put(romanNumber.charAt(i), charCount.get(romanNumber.charAt(i)) + 1);
-                    if (i > 0 && romanNumber.charAt(i) != romanNumber.charAt(i - 1)) {
-                        for (char threeTimesChar : threeTimesChars) {
-                            if (threeTimesChar != romanNumber.charAt(i)) {
-                                charCount.put(threeTimesChar, 0);
-                            }
-                        }
-                    }
-                    break;
-                case 'V':
-                case 'L':
-                case 'D':
-                    if (charCount.get(romanNumber.charAt(i)) == 1) return -1;
-                    charCount.put(romanNumber.charAt(i), charCount.get(romanNumber.charAt(i)) + 1);
-                    for (char threeTimesChar : threeTimesChars) {
-                        charCount.put(threeTimesChar, 0);
-                    }
-                    break;
-                default:
-                    return -1;
-            }
-        }
+        if (!romanNumber.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")) return -1;
         int result = 0;
         int i = 0;
         int previous = Integer.MAX_VALUE;
