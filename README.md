@@ -1,4 +1,4 @@
-## Dancing with a tambourine to run a Kafka Server on Windows
+## Dancing with a tambourine to run a Kafka Server with ZooKeeper on Windows
 
 #### 1. **Rename**
 
