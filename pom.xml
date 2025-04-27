@@ -13,12 +13,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>leetcode</name>
 	<description>leetcode</description>
+	<packaging>pom</packaging>
 	<modules>
 		<module>core</module>
 		<module>base</module>
 		<module>task0001</module>
 		<module>task0002</module>
 		<module>task0003</module>
+		<module>task0009</module>
+		<module>task0013</module>
+		<module>task0329</module>
+		<module>task0437</module>
+		<module>task1512</module>
 	</modules>
 	<url/>
 	<licenses>
