@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0035;
+package lorgar.avrelian.task0058;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @OpenAPIDefinition(
         info = @Info(
-                title = "LeetCode task № 35",
-                description = "An application for solving task № 35 of the LeetCode website and verifying its results in Java",
+                title = "LeetCode task № 58",
+                description = "An application for solving task № 58 of the LeetCode website and verifying its results in Java",
                 version = "0.1.0",
                 contact = @Contact(
                         name = "Victor Tokovenko",
@@ -19,10 +19,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 )
         )
 )
-public class Task0035Application {
+public class Task0058Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Task0035Application.class, args);
+        SpringApplication.run(Task0058Application.class, args);
     }
 
 }
