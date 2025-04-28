@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0027.service;
+package lorgar.avrelian.task0028.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,7 @@ import lorgar.avrelian.base.model.TestValues;
 import lorgar.avrelian.base.service.TaskRunService;
 import lorgar.avrelian.base.util.TaskRunUtil;
 import lorgar.avrelian.base.util.TopicNameUtil;
-import lorgar.avrelian.task0027.model.Task0027;
+import lorgar.avrelian.task0028.model.Task0028;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -17,19 +17,15 @@ import reactor.kafka.receiver.KafkaReceiver;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class Task0027RunService implements TaskRunService<Map<int[], Integer>, Integer> {
-    private static final TestValues<Map<int[], Integer>, Integer> testValues = new TestValues<>(
+public class Task0028RunService implements TaskRunService<String[], Integer> {
+    private static final TestValues<String[], Integer> testValues = new TestValues<>(
             Map.of(
-                    new HashMap<>(Map.of(new int[]{3, 2, 2, 3}, 3)), 2,
-                    new HashMap<>(Map.of(new int[]{0, 1, 2, 2, 3, 0, 4, 2}, 2)), 5,
-                    new HashMap<>(Map.of(new int[]{2}, 3)), 1,
-                    new HashMap<>(Map.of(new int[]{3, 3}, 5)), 2,
-                    new HashMap<>(Map.of(new int[]{4, 5}, 4)), 1
+                    new String[]{"sadbutsad", "sad"}, 0,
+                    new String[]{"leetcode", "leeto"}, -1
             )
     );
     @Value("${task.number}")
@@ -37,7 +33,7 @@ public class Task0027RunService implements TaskRunService<Map<int[], Integer>, I
     private final KafkaSender<String, Object> kafkaSender;
     private final KafkaReceiver<String, Object> kafkaReceiver;
 
-    public Task0027RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
+    public Task0028RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
         this.kafkaSender = kafkaSender;
         this.kafkaReceiver = kafkaReceiver;
     }
@@ -58,11 +54,11 @@ public class Task0027RunService implements TaskRunService<Map<int[], Integer>, I
     }
 
     @Override
-    public TaskReport<Map<int[], Integer>, Integer> runTask() {
-        Task0027 t = new Task0027(testValues);
-        TaskRunUtil<Map<int[], Integer>, Integer> taskRunUtil = new TaskRunUtil<>(t);
-        List<RunResult<Map<int[], Integer>, Integer>> runResults = taskRunUtil.doTask(testValues);
-        TaskReport<Map<int[], Integer>, Integer> report = new TaskReport<>();
+    public TaskReport<String[], Integer> runTask() {
+        Task0028 t = new Task0028(testValues);
+        TaskRunUtil<String[], Integer> taskRunUtil = new TaskRunUtil<>(t);
+        List<RunResult<String[], Integer>> runResults = taskRunUtil.doTask(testValues);
+        TaskReport<String[], Integer> report = new TaskReport<>();
         report.setId(taskNumber);
         report.setResults(runResults);
         report.setUpdated(true);
