@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.4</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>lorgar.avrelian</groupId>
-    <artifactId>task0001</artifactId>
+    <artifactId>task0035</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>task0001</name>
-    <description>task0001</description>
+    <name>task0035</name>
+    <description>task0035</description>
     <url/>
     <licenses>
         <license/>

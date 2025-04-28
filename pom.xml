@@ -28,6 +28,7 @@
 		<module>task0026</module>
 		<module>task0027</module>
 		<module>task0028</module>
+		<module>task0035</module>
 		<module>task0329</module>
 		<module>task0437</module>
 		<module>task1512</module>
@@ -46,9 +47,9 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>24</java.version>
-		<maven.compiler.source>24</maven.compiler.source>
-		<maven.compiler.target>24</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
