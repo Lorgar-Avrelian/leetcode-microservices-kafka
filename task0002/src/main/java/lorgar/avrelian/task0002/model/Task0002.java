@@ -3,54 +3,15 @@ package lorgar.avrelian.task0002.model;
 import lorgar.avrelian.base.model.Task;
 import lorgar.avrelian.base.model.TestValues;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Task0002 extends Task<int[][], int[]> {
+public class Task0002 extends Task<ListNode[], ListNode> {
     static boolean overflow = false;
-    public Task0002(TestValues<int[][], int[]> testValues) {
+    public Task0002(TestValues<ListNode[], ListNode> testValues) {
         super(testValues);
     }
 
     @Override
-    public int[] doTask(int[][] input) {
-        ListNode[] nodes = arrayToListNodes(input);
-        ListNode listNode = addTwoNumbers(nodes[0], nodes[1]);
-        return listNodesToArray(listNode);
-    }
-
-    private int[] listNodesToArray(ListNode listNode) {
-        List<Integer> list = new ArrayList<>();
-        ListNode current = listNode;
-        while (current.next != null) {
-            list.add(current.val);
-            current = current.next;
-        }
-        list.add(current.val);
-        int[] result = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
-        }
-        return result;
-    }
-
-    private ListNode[] arrayToListNodes(int[][] input) {
-        ListNode[] nodes = new ListNode[input.length];
-        for (int i = 0; i < input.length; i++) {
-            ListNode node = new ListNode();
-            int[] ints = input[i];
-            for (int j = ints.length - 1; j >= 0; j--) {
-                if (j != ints.length - 1) {
-                    ListNode newNode = new ListNode(ints[j]);
-                    newNode.next = node;
-                    node = newNode;
-                } else {
-                    node.val = ints[j];
-                }
-            }
-            nodes[i] = node;
-        }
-        return nodes;
+    public ListNode doTask(ListNode[] input) {
+        return addTwoNumbers(input[0], input[1]);
     }
 
     private static ListNode addTwoNumbers(ListNode l1, ListNode l2) {

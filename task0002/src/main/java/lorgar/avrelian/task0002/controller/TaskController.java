@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lorgar.avrelian.base.model.TaskReport;
 import lorgar.avrelian.base.service.TaskRunService;
+import lorgar.avrelian.task0002.model.ListNode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "Task № 2", description = "Task № 2 controller")
 public class TaskController {
-    private final TaskRunService<int[][], int[]> taskRunService;
+    private final TaskRunService<ListNode[], ListNode> taskRunService;
 
-    public TaskController(TaskRunService<int[][], int[]> taskRunService) {
+    public TaskController(TaskRunService<ListNode[], ListNode> taskRunService) {
         this.taskRunService = taskRunService;
     }
 
@@ -45,8 +46,8 @@ public class TaskController {
                     )
             }
     )
-    public ResponseEntity<TaskReport<int[][], int[]>> getResult() {
-        TaskReport<int[][], int[]> report = taskRunService.runTask();
+    public ResponseEntity<TaskReport<ListNode[], ListNode>> getResult() {
+        TaskReport<ListNode[], ListNode> report = taskRunService.runTask();
         return ResponseEntity.ok(report);
     }
 }

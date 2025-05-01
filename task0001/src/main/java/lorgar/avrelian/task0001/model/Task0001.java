@@ -3,14 +3,17 @@ package lorgar.avrelian.task0001.model;
 import lorgar.avrelian.base.model.Task;
 import lorgar.avrelian.base.model.TestValues;
 
-public class Task0001 extends Task<Input, int[]> {
-    public Task0001(TestValues<Input, int[]> testValues) {
+import java.util.Map;
+
+public class Task0001 extends Task<Map<int[], Integer>, int[]> {
+    public Task0001(TestValues<Map<int[], Integer>, int[]> testValues) {
         super(testValues);
     }
 
     @Override
-    public int[] doTask(Input input) {
-        return twoSum(input.getArray(), input.getTarget());
+    public int[] doTask(Map<int[], Integer> input) {
+        int[] ints = input.keySet().stream().findFirst().get();
+        return twoSum(ints, input.get(ints));
     }
 
     private int[] twoSum(int[] nums, int target) {

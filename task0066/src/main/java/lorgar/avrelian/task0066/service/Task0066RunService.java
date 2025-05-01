@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0002.service;
+package lorgar.avrelian.task0066.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,8 +9,7 @@ import lorgar.avrelian.base.model.TestValues;
 import lorgar.avrelian.base.service.TaskRunService;
 import lorgar.avrelian.base.util.TaskRunUtil;
 import lorgar.avrelian.base.util.TopicNameUtil;
-import lorgar.avrelian.task0002.model.ListNode;
-import lorgar.avrelian.task0002.model.Task0002;
+import lorgar.avrelian.task0066.model.Task0066;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -22,17 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class Task0002RunService implements TaskRunService<ListNode[], ListNode> {
-    private static final TestValues<ListNode[], ListNode> testValues = new TestValues<>(
+public class Task0066RunService implements TaskRunService<int[], int[]> {
+    private static final TestValues<int[], int[]> testValues = new TestValues<>(
             Map.of(
-                    new ListNode[]{new ListNode(2, new ListNode(4, new ListNode(3))), new ListNode(5, new ListNode(6, new ListNode(4)))},
-                    new ListNode(7, new ListNode(0, new ListNode(8))),
-                    //
-                    new ListNode[]{new ListNode(0), new ListNode(0)},
-                    new ListNode(0),
-                    //
-                    new ListNode[]{new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))))))), new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))))},
-                    new ListNode(8, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(0, new ListNode(0, new ListNode(0, new ListNode(1))))))))
+                    new int[]{1, 2, 3}, new int[]{1, 2, 4},
+                    new int[]{4, 3, 2, 1}, new int[]{4, 3, 2, 2},
+                    new int[]{9}, new int[]{10}
             )
     );
     @Value("${task.number}")
@@ -40,7 +34,7 @@ public class Task0002RunService implements TaskRunService<ListNode[], ListNode> 
     private final KafkaSender<String, Object> kafkaSender;
     private final KafkaReceiver<String, Object> kafkaReceiver;
 
-    public Task0002RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
+    public Task0066RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
         this.kafkaSender = kafkaSender;
         this.kafkaReceiver = kafkaReceiver;
     }
@@ -61,11 +55,11 @@ public class Task0002RunService implements TaskRunService<ListNode[], ListNode> 
     }
 
     @Override
-    public TaskReport<ListNode[], ListNode> runTask() {
-        Task0002 t = new Task0002(testValues);
-        TaskRunUtil<ListNode[], ListNode> taskRunUtil = new TaskRunUtil<>(t);
-        List<RunResult<ListNode[], ListNode>> runResults = taskRunUtil.doTask(testValues);
-        TaskReport<ListNode[], ListNode> report = new TaskReport<>();
+    public TaskReport<int[], int[]> runTask() {
+        Task0066 t = new Task0066(testValues);
+        TaskRunUtil<int[], int[]> taskRunUtil = new TaskRunUtil<>(t);
+        List<RunResult<int[], int[]>> runResults = taskRunUtil.doTask(testValues);
+        TaskReport<int[], int[]> report = new TaskReport<>();
         report.setId(taskNumber);
         report.setResults(runResults);
         report.setUpdated(true);
