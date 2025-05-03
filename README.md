@@ -2,7 +2,7 @@
 
 | Input / Output | `Integer` | `Boolean` |
 |:--------------:|:---------:|:---------:|
-|   `Integer`    |    69     |     9     |
+|   `Integer`    |  69, 70   |     9     |
 |    `String`    | 3, 13, 58 |    20     |
 |   `TreeNode`   |    437    |           |
 
