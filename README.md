@@ -1,10 +1,11 @@
 ## Distribution of tasks by type of input/output data
 
-| Input / Output | `Integer` | `Boolean` |
-|:--------------:|:---------:|:---------:|
-|   `Integer`    |  69, 70   |     9     |
-|    `String`    | 3, 13, 58 |    20     |
-|   `TreeNode`   |    437    |           |
+| Input / Output | `Integer` | `Boolean` | `ListNode` |
+|:--------------:|:---------:|:---------:|:----------:|
+|   `Integer`    |  69, 70   |     9     |            |
+|    `String`    | 3, 13, 58 |    20     |            |
+|   `ListNode`   |           |           |     83     |
+|   `TreeNode`   |    437    |           |            |
 
 | Input / Output |    `Integer`     | `String` | `ListNode` |
 |:--------------:|:----------------:|:--------:|:----------:|
