@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0437.model;
+package lorgar.avrelian.task0094.model;
 
 import java.util.Objects;
 
