@@ -5,7 +5,7 @@
 |   `Integer`    |  69, 70   |     9     |            |
 |    `String`    | 3, 13, 58 |    20     |            |
 |   `ListNode`   |           |           |     83     |
-|   `TreeNode`   |    437    |           |            |
+|   `TreeNode`   |    437    |    101    |            |
 
 | Input / Output |    `Integer`     | `Boolean` | `String` | `ListNode` |
 |:--------------:|:----------------:|:---------:|:--------:|:----------:|
