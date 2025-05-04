@@ -1,4 +1,4 @@
-package lorgar.avrelian.task0437.service;
+package lorgar.avrelian.task0100.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,7 +10,7 @@ import lorgar.avrelian.base.model.TreeNode;
 import lorgar.avrelian.base.service.TaskRunService;
 import lorgar.avrelian.base.util.TaskRunUtil;
 import lorgar.avrelian.base.util.TopicNameUtil;
-import lorgar.avrelian.task0437.model.Task0437;
+import lorgar.avrelian.task0100.model.Task0100;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -18,53 +18,30 @@ import reactor.kafka.receiver.KafkaReceiver;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderRecord;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class Task0437RunService implements TaskRunService<Map<TreeNode, Integer>, Integer> {
-    private static final TestValues<Map<TreeNode, Integer>, Integer> testValues = new TestValues<>(
+public class Task0100RunService implements TaskRunService<TreeNode[], Boolean> {
+    private static final TestValues<TreeNode[], Boolean> testValues = new TestValues<>(
             Map.of(
-                    new HashMap<>(Map.of(
-                            new TreeNode(10,
-                                    new TreeNode(5,
-                                            new TreeNode(3,
-                                                    new TreeNode(3), new TreeNode(-2)),
-                                            new TreeNode(2,
-                                                    null, new TreeNode(1))),
-                                    new TreeNode(-3,
-                                            null, new TreeNode(11))),
-                            8
-                    )), 3,
+                    new TreeNode[]{new TreeNode(1, new TreeNode(2), new TreeNode(3)), new TreeNode(1, new TreeNode(2), new TreeNode(3))}, true,
                     /*
-                     *               10
-                     *             /    \
-                     *            5     -3
-                     *          /   \      \
-                     *         3     2      11
-                     *       /   \     \
-                     *      3     -2    1
+                     *   1       1
+                     *  / \     / \
+                     * 2   3   2   3
                      * */
-                    new HashMap<>(Map.of(
-                            new TreeNode(5,
-                                    new TreeNode(4,
-                                            new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),
-                                    new TreeNode(8,
-                                            new TreeNode(13), new TreeNode(4,
-                                            new TreeNode(5), new TreeNode(1)))
-                            ),
-                            22
-                    )),
-                    3
+                    new TreeNode[]{new TreeNode(1, new TreeNode(2), null), new TreeNode(1, null, new TreeNode(2))}, false,
                     /*
-                     *                5
-                     *             /    \
-                     *            4      8
-                     *          /       /  \
-                     *         11      13   4
-                     *       /   \        /   \
-                     *      7     2      5     1
+                     *   1  1
+                     *  /    \
+                     * 2      2
+                     * */
+                    new TreeNode[]{new TreeNode(1, new TreeNode(2), new TreeNode(1)), new TreeNode(1, new TreeNode(1), new TreeNode(2))}, false
+                    /*
+                     *   1       1
+                     *  / \     / \
+                     * 2   1   1   2
                      * */
             )
     );
@@ -73,7 +50,7 @@ public class Task0437RunService implements TaskRunService<Map<TreeNode, Integer>
     private final KafkaSender<String, Object> kafkaSender;
     private final KafkaReceiver<String, Object> kafkaReceiver;
 
-    public Task0437RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
+    public Task0100RunService(KafkaSender<String, Object> kafkaSender, KafkaReceiver<String, Object> kafkaReceiver) {
         this.kafkaSender = kafkaSender;
         this.kafkaReceiver = kafkaReceiver;
     }
@@ -94,11 +71,11 @@ public class Task0437RunService implements TaskRunService<Map<TreeNode, Integer>
     }
 
     @Override
-    public TaskReport<Map<TreeNode, Integer>, Integer> runTask() {
-        Task0437 t = new Task0437(testValues);
-        TaskRunUtil<Map<TreeNode, Integer>, Integer> taskRunUtil = new TaskRunUtil<>(t);
-        List<RunResult<Map<TreeNode, Integer>, Integer>> runResults = taskRunUtil.doTask(testValues);
-        TaskReport<Map<TreeNode, Integer>, Integer> report = new TaskReport<>();
+    public TaskReport<TreeNode[], Boolean> runTask() {
+        Task0100 t = new Task0100(testValues);
+        TaskRunUtil<TreeNode[], Boolean> taskRunUtil = new TaskRunUtil<>(t);
+        List<RunResult<TreeNode[], Boolean>> runResults = taskRunUtil.doTask(testValues);
+        TaskReport<TreeNode[], Boolean> report = new TaskReport<>();
         report.setId(taskNumber);
         report.setResults(runResults);
         report.setUpdated(true);

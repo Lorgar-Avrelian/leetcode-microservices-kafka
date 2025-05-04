@@ -2,6 +2,7 @@ package lorgar.avrelian.task0437.model;
 
 import lorgar.avrelian.base.model.Task;
 import lorgar.avrelian.base.model.TestValues;
+import lorgar.avrelian.base.model.TreeNode;
 
 import java.util.*;
 

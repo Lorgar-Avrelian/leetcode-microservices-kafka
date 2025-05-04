@@ -1,12 +1,12 @@
-package lorgar.avrelian.task0083.controller;
+package lorgar.avrelian.task0100.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lorgar.avrelian.base.model.ListNode;
 import lorgar.avrelian.base.model.TaskReport;
+import lorgar.avrelian.base.model.TreeNode;
 import lorgar.avrelian.base.service.TaskRunService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Tag(name = "Task № 83", description = "Task № 83 controller")
+@Tag(name = "Task № 100", description = "Task № 100 controller")
 public class TaskController {
-    private final TaskRunService<ListNode, ListNode> taskRunService;
+    private final TaskRunService<TreeNode[], Boolean> taskRunService;
 
-    public TaskController(TaskRunService<ListNode, ListNode> taskRunService) {
+    public TaskController(TaskRunService<TreeNode[], Boolean> taskRunService) {
         this.taskRunService = taskRunService;
     }
 
@@ -46,8 +46,8 @@ public class TaskController {
                     )
             }
     )
-    public ResponseEntity<TaskReport<ListNode, ListNode>> getResult() {
-        TaskReport<ListNode, ListNode> report = taskRunService.runTask();
+    public ResponseEntity<TaskReport<TreeNode[], Boolean>> getResult() {
+        TaskReport<TreeNode[], Boolean> report = taskRunService.runTask();
         return ResponseEntity.ok(report);
     }
 }

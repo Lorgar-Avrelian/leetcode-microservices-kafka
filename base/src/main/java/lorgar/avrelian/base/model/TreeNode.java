@@ -1,13 +1,16 @@
-package lorgar.avrelian.task0094.model;
+package lorgar.avrelian.base.model;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Objects;
 
-/**
- * @author Victor Tokovenko
- */
+@Schema(title = "TreeNode", description = "TreeNode model")
 public class TreeNode {
+    @Schema(title = "Value", description = "Value")
     public int val;
+    @Schema(title = "Left", description = "Left node")
     public TreeNode left;
+    @Schema(title = "Right", description = "Right node")
     public TreeNode right;
 
     public TreeNode() {
@@ -21,18 +24,6 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
-    }
-
-    public int getVal() {
-        return val;
-    }
-
-    public TreeNode getLeft() {
-        return left;
-    }
-
-    public TreeNode getRight() {
-        return right;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package lorgar.avrelian.task0021.model;
 
+import lorgar.avrelian.base.model.ListNode;
 import lorgar.avrelian.base.model.Task;
 import lorgar.avrelian.base.model.TestValues;
 

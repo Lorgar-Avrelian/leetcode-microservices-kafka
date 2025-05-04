@@ -1,10 +1,12 @@
 package lorgar.avrelian.task0002.model;
 
+import lorgar.avrelian.base.model.ListNode;
 import lorgar.avrelian.base.model.Task;
 import lorgar.avrelian.base.model.TestValues;
 
 public class Task0002 extends Task<ListNode[], ListNode> {
     static boolean overflow = false;
+
     public Task0002(TestValues<ListNode[], ListNode> testValues) {
         super(testValues);
     }

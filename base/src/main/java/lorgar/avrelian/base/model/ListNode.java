@@ -1,10 +1,12 @@
-package lorgar.avrelian.task0083.model;
+package lorgar.avrelian.base.model;
 
-/**
- * @author Victor Tokovenko
- */
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(title = "ListNode", description = "ListNode model")
 public class ListNode {
+    @Schema(title = "Value", description = "Value")
     public int val;
+    @Schema(title = "Next", description = "Next node")
     public ListNode next;
 
     public ListNode() {
