@@ -5,7 +5,7 @@
 |   `Integer`    |  69, 70   |     9     |            |
 |    `String`    | 3, 13, 58 |    20     |            |
 |   `ListNode`   |           |           |     83     |
-|   `TreeNode`   |    437    |    101    |            |
+|   `TreeNode`   |    104    |    101    |            |
 
 | Input / Output |    `Integer`     | `Boolean` | `String` | `ListNode` |
 |:--------------:|:----------------:|:---------:|:--------:|:----------:|
@@ -14,6 +14,10 @@
 |   `String[]`   |        28        |           |  14, 67  |            |
 |  `ListNode[]`  |                  |           |          |   2, 21    |
 |  `TreeNode[]`  |                  |    100    |          |            |
+
+|      Input / Output      | `Integer` |
+|:------------------------:|:---------:|
+| `Map<TreeNode, Integer>` |    437    |
 
 | Input / Output | `int[]` |
 |:--------------:|:-------:|
